@@ -1,5 +1,5 @@
 import React from 'react';
-import PhotoListItem from './components/PhotoListItem';
+import PhotoList from './components/PhotoList';
 import './App.scss';
 
 
@@ -12,7 +12,7 @@ const App = () => {
       {/* {[...Array(3)].map((photo, index) => ( */}
       {/* // <PhotoListItem key={index} photo={sampleDataForPhotoListItem} /> */}
       {/* ))} */}
-      <PhotoListItem/>
+      <PhotoList/>
     </div>
   );
 };
