@@ -1,8 +1,7 @@
 import "../styles/TopicListItem.scss";
 
 
-const TopicListItem = ({ topic }) => {
-  const { id, slug, title } = topic;
+const TopicListItem = ({ title }) => {
 
   return (
     <div className="topic-list__item">
