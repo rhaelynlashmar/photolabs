@@ -9,11 +9,15 @@ const PhotoListItem = ({ photo }) => {
   const { name, profile } = user;
 
   return (
-    <div className="photoListItem">
-      <img src={regular} alt={`Photo by ${name}`} />
-      <img src={profile} alt={`${name}'s profile`} />
-      <h2>{name}</h2>
-      <p>{city}, {country}</p>
+    <div className="photo-list__item">
+      <img className="photo-list__image" src={regular} alt={`Photo by ${name}`} />
+      <div className="photo-list__user-details">
+        <img className="photo-list__user-profile" src={profile} alt={`${name}'s profile`} />
+        <div className="photo-list__user-info">
+          <h2>{name}</h2>
+          <p>{city}, {country}</p>
+        </div> 
+      </div>
     </div>
   );
 };
