@@ -10,9 +10,6 @@ const App = () => {
   
   return (
     <div className="App">
-      {/* {[...Array(3)].map((photo, index) => ( */}
-      {/* // <PhotoListItem key={index} photo={sampleDataForPhotoListItem} /> */}
-      {/* ))} */}
       <TopicList />
       <PhotoList/>
     </div>
