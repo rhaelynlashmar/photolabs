@@ -1,6 +1,7 @@
 import React from 'react';
 import PhotoList from './components/PhotoList';
 import './App.scss';
+import TopicList from './components/TopicList';
 
 
 
@@ -12,6 +13,7 @@ const App = () => {
       {/* {[...Array(3)].map((photo, index) => ( */}
       {/* // <PhotoListItem key={index} photo={sampleDataForPhotoListItem} /> */}
       {/* ))} */}
+      <TopicList />
       <PhotoList/>
     </div>
   );
