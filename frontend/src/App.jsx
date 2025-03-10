@@ -1,7 +1,7 @@
 import React from 'react';
 import PhotoList from './components/PhotoList';
+import TopNavigation from './components/TopNavigationBar';
 import './App.scss';
-import TopicList from './components/TopicList';
 
 
 
@@ -10,7 +10,7 @@ const App = () => {
   
   return (
     <div className="App">
-      <TopicList />
+      <TopNavigation />
       <PhotoList/>
     </div>
   );
