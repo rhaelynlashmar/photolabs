@@ -11,3 +11,4 @@ const FavBadge = ({ isFavPhotoExist }) => {
 };
 
 export default FavBadge;
+
