@@ -3,8 +3,10 @@ import './App.scss';
 import HomeRoute from './routes/HomeRoute';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
 
 const App = () => {
+  const [modalPhoto, setModalPhoto] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
   const addFavorite = (photo) => {
@@ -15,6 +17,14 @@ const App = () => {
     setFavorites(favorites.filter(photo => photo.id !== photoId));
   };
 
+  const handlePhotoClick = (photo) => {
+    setModalPhoto(photo);
+  };
+
+  const closeModal = () => {
+    setModalPhoto(null);
+  };
+
   return (
     <div className="App">
       <HomeRoute 
@@ -23,7 +33,11 @@ const App = () => {
         favorites={favorites} 
         addFavorite={addFavorite} 
         removeFavorite={removeFavorite} 
+        onPhotoClick={handlePhotoClick}
       />
+       {modalPhoto && (
+      <PhotoDetailsModal photo={modalPhoto} onClose={closeModal} />
+    )}
     </div>
   );
 };
