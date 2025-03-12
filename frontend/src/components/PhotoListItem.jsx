@@ -2,14 +2,14 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({ photo, favorites, addFavorite, removeFavorite }) => {
+const PhotoListItem = ({ photo, favorites, addFavorite, removeFavorite, onClick }) => {
   const { id, location, urls, user} = photo;
   const { city, country} = location;
   const { full, regular } = urls;
   const { name, profile } = user;
 
   return (
-    <div className="photo-list__item">
+    <div className="photo-list__item" onClick={onClick}>
       <PhotoFavButton 
         photo={photo}
         favorites={favorites} 
