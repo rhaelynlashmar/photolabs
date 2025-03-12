@@ -9,7 +9,6 @@ const App = () => {
 
   const addFavorite = (photo) => {
     setFavorites([...favorites, photo]);
-    console.log("added photo")
   };
 
   const removeFavorite = (photoId) => {
