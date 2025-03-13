@@ -1,8 +1,7 @@
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-
-const PhotoListItem = ({ photo, favorites, addFavorite, removeFavorite, onClick }) => {
+const PhotoListItem = ({ photo, favorites, toggleFavorite, onClick }) => {
   const { id, location, urls, user } = photo;
   const { city, country } = location;
   const { regular } = urls;
@@ -13,8 +12,7 @@ const PhotoListItem = ({ photo, favorites, addFavorite, removeFavorite, onClick 
       <PhotoFavButton 
         photo={photo}
         favorites={favorites} 
-        addFavorite={addFavorite} 
-        removeFavorite={removeFavorite} 
+        toggleFavorite={toggleFavorite} 
       />
       <img className="photo-list__image" src={regular} alt={`Photo by ${name}`} />
       <div className="photo-list__user-details">

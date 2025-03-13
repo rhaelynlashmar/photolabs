@@ -2,19 +2,14 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 import React, { useState } from 'react';
 
-const PhotoFavButton = ({ photo, favorites, addFavorite, removeFavorite }) => {
+const PhotoFavButton = ({ photo, favorites, toggleFavorite }) => {
   const [isActive, setIsActive] = useState(false);
 
   const isFavorited = favorites.some(fav => fav.id === photo.id);
 
   const handleFavorite = () => {
     setIsActive(!isActive);
-
-    if (isFavorited) {
-      removeFavorite(photo.id);
-    } else {
-      addFavorite(photo);
-    }
+    toggleFavorite(photo);
   };
 
   return (

@@ -3,9 +3,9 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from '../components/PhotoFavButton';
 import PhotoList from '../components/PhotoList';
 
-const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onClose, onPhotoClick }) => {
+const PhotoDetailsModal = ({ photo, favorites, toggleFavorite, onClose, onPhotoClick }) => {
   if (!photo) {
-    return null; // 
+    return null; 
   }
   
   const { id, location, urls, user } = photo;
@@ -25,12 +25,10 @@ const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onCl
         <PhotoFavButton 
           photo={photo}
           favorites={favorites} 
-          addFavorite={addFavorite} 
-          removeFavorite={removeFavorite} 
+          toggleFavorite={toggleFavorite} 
         />
         <img className="photo-details-modal__image" src={regular} alt={`Image taken by ${name} in ${city}, ${country}`}></img>
       </div>
-      
       
       <div className="photo-details-modal__header">
         <div className="photo-details-modal__photographer-details">
@@ -41,15 +39,12 @@ const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onCl
         </div>
         </div>
       
-    
-      
       <h3 className="photo-details-modal__top-bar">Similar Photos</h3>
         <div className="photo-details-modal__images">
         <PhotoList 
           photos={similarPhotos} 
           favorites={favorites} 
-          addFavorite={addFavorite} 
-          removeFavorite={removeFavorite} 
+          toggleFavorite={toggleFavorite} 
           onPhotoClick={onPhotoClick}
       />
       </div>
