@@ -3,9 +3,9 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = ({ photo, favorites, addFavorite, removeFavorite, onClick }) => {
-  const { id, location, urls, user} = photo;
-  const { city, country} = location;
-  const { full, regular } = urls;
+  const { id, location, urls, user } = photo;
+  const { city, country } = location;
+  const { regular } = urls;
   const { name, profile } = user;
 
   return (
