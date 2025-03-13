@@ -25,6 +25,7 @@ const App = () => {
     setModalPhoto(null);
   };
 
+
   return (
     <div className="App">
       <HomeRoute 
@@ -35,9 +36,15 @@ const App = () => {
         removeFavorite={removeFavorite} 
         onPhotoClick={handlePhotoClick}
       />
-       {modalPhoto && (
-      <PhotoDetailsModal photo={modalPhoto} onClose={closeModal} />
-    )}
+      {modalPhoto && (
+        <PhotoDetailsModal 
+          photo={modalPhoto} 
+          favorites={favorites} 
+          addFavorite={addFavorite} 
+          removeFavorite={removeFavorite} 
+          onClose={closeModal}  
+        />
+      )}
     </div>
   );
 };
