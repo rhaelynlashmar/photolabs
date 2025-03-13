@@ -4,6 +4,10 @@ import PhotoFavButton from '../components/PhotoFavButton';
 import PhotoList from '../components/PhotoList';
 
 const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onClose, onPhotoClick }) => {
+  if (!photo) {
+    return null; // 
+  }
+  
   const { id, location, urls, user } = photo;
   const { city, country } = location;
   const { regular } = urls;
@@ -24,7 +28,7 @@ const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onCl
           addFavorite={addFavorite} 
           removeFavorite={removeFavorite} 
         />
-        <img className="photo-details-modal__image" src={regular} alt={`Image taken in ${city}, ${country}`}></img>
+        <img className="photo-details-modal__image" src={regular} alt={`Image taken by ${name} in ${city}, ${country}`}></img>
       </div>
       
       
@@ -40,7 +44,7 @@ const PhotoDetailsModal = ({ photo, favorites, addFavorite, removeFavorite, onCl
     
       
       <h3 className="photo-details-modal__top-bar">Similar Photos</h3>
-        <div classname="className='photo-details-modal__images">
+        <div className="photo-details-modal__images">
         <PhotoList 
           photos={similarPhotos} 
           favorites={favorites} 
