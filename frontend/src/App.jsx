@@ -9,12 +9,13 @@ const App = () => {
   const [modalPhoto, setModalPhoto] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
-  const addFavorite = (photo) => {
-    setFavorites([...favorites, photo]);
-  };
-
-  const removeFavorite = (photoId) => {
-    setFavorites(favorites.filter(photo => photo.id !== photoId));
+  const toggleFavorite = (photo) => {
+    const isFavorited = favorites.some(fav => fav.id === photo.id);
+    if (isFavorited) {
+      setFavorites(favorites.filter(fav => fav.id !== photo.id));
+    } else {
+      setFavorites([...favorites, photo]);
+    }
   };
 
   const handlePhotoClick = (photo) => {
@@ -25,23 +26,20 @@ const App = () => {
     setModalPhoto(null);
   };
 
-
   return (
     <div className="App">
       <HomeRoute 
         photos={photos} 
         topics={topics} 
         favorites={favorites} 
-        addFavorite={addFavorite} 
-        removeFavorite={removeFavorite} 
+        toggleFavorite={toggleFavorite} 
         onPhotoClick={handlePhotoClick}
       />
       {modalPhoto && (
         <PhotoDetailsModal 
           photo={modalPhoto} 
           favorites={favorites} 
-          addFavorite={addFavorite} 
-          removeFavorite={removeFavorite} 
+          toggleFavorite={toggleFavorite} 
           onClose={closeModal}  
         />
       )}
