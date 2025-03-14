@@ -3,31 +3,35 @@ import photos from '../mocks/photos';
 import topics from '../mocks/topics';
 
 const useApplicationData = () => {
-  const [modalPhoto, setModalPhoto] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const [state, setState] = useState({
+    modalPhoto: null,
+    favorites: [],
+    photos: photos,
+    topics: topics
+  });
 
   const toggleFavorite = (photo) => {
-    const isFavorited = favorites.some(fav => fav.id === photo.id);
-    if (isFavorited) {
-      setFavorites(favorites.filter(fav => fav.id !== photo.id));
-    } else {
-      setFavorites([...favorites, photo]);
-    }
+    const isFavorited = state.favorites.some(fav => fav.id === photo.id);
+    const newFavorites = isFavorited
+      ? state.favorites.filter(fav => fav.id !== photo.id)
+      : [...state.favorites, photo];
+
+    setState(prev => ({ ...prev, favorites: newFavorites }));
   };
 
   const handlePhotoClick = (photo) => {
-    setModalPhoto(photo);
+    setState(prev => ({ ...prev, modalPhoto: photo }));
   };
 
   const closeModal = () => {
-    setModalPhoto(null);
+    setState(prev => ({ ...prev, modalPhoto: null }));
   };
 
   return {
-    modalPhoto,
-    favorites,
-    photos,
-    topics,
+    modalPhoto: state.modalPhoto,
+    favorites: state.favorites,
+    photos: state.photos,
+    topics: state.topics,
     toggleFavorite,
     handlePhotoClick,
     closeModal
