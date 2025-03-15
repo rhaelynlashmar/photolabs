@@ -11,7 +11,7 @@ const App = () => {
     photos,
     topics,
     toggleFavorite,
-    handlePhotoClick,
+    openModal,
     closeModal
   } = useApplicationData();
 
@@ -22,7 +22,7 @@ const App = () => {
         topics={topics} 
         favorites={favorites} 
         toggleFavorite={toggleFavorite} 
-        onPhotoClick={handlePhotoClick}
+        onPhotoClick={openModal} 
       />
       {modalPhoto && (
         <PhotoDetailsModal 
