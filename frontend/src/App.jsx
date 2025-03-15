@@ -22,7 +22,7 @@ const App = () => {
         topics={topics} 
         favorites={favorites} 
         toggleFavorite={toggleFavorite} 
-        onPhotoClick={openModal} 
+        openModal={openModal} 
       />
       {modalPhoto && (
         <PhotoDetailsModal 

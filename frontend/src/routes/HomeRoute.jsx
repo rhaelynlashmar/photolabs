@@ -14,7 +14,7 @@ const HomeRoute = ({ topics, photos, favorites, toggleFavorite, openModal }) => 
         photos={photos} 
         favorites={favorites} 
         toggleFavorite={toggleFavorite}
-        onPhotoClick={openModal} 
+        openModal={openModal} 
       />
     </div>
   );

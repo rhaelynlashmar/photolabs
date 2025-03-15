@@ -10,7 +10,7 @@ const PhotoList = ({ photos, favorites, toggleFavorite, openModal }) => {
           photo={photo} 
           favorites={favorites} 
           toggleFavorite={toggleFavorite}
-          onClick={() => openModal(photo)} 
+          openModal={openModal} 
         />
       ))}
     </ul>

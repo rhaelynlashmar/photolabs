@@ -19,10 +19,6 @@ const useApplicationData = () => {
     setState(prev => ({ ...prev, favorites: newFavorites }));
   };
 
-  const handlePhotoClick = (photo) => {
-    setState(prev => ({ ...prev, modalPhoto: photo }));
-  };
-
   const closeModal = () => {
     setState(prev => ({ ...prev, modalPhoto: null }));
   };
@@ -37,7 +33,6 @@ const useApplicationData = () => {
     photos: state.photos,
     topics: state.topics,
     toggleFavorite,
-    handlePhotoClick,
     openModal,
     closeModal
   };

@@ -3,7 +3,7 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from '../components/PhotoFavButton';
 import PhotoList from '../components/PhotoList';
 
-const PhotoDetailsModal = ({ photo, favorites, toggleFavorite, onClose, onPhotoClick }) => {
+const PhotoDetailsModal = ({ photo, favorites, toggleFavorite, onClose, openModal }) => { 
   if (!photo) {
     return null; 
   }
@@ -45,7 +45,7 @@ const PhotoDetailsModal = ({ photo, favorites, toggleFavorite, onClose, onPhotoC
           photos={similarPhotos} 
           favorites={favorites} 
           toggleFavorite={toggleFavorite} 
-          onPhotoClick={onPhotoClick}
+          openModal={openModal} 
       />
       </div>
 
