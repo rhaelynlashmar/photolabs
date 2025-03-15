@@ -8,7 +8,7 @@ const PhotoFavButton = ({ photo, favorites, toggleFavorite }) => {
   const isFavorited = favorites.some(fav => fav.id === photo.id);
 
   const handleFavorite = (event) => {
-    event.stopPropagation(); // Stop event propagation
+    event.stopPropagation(); // Stop  bubbling up the tree from modal opening
     setIsActive(!isActive);
     toggleFavorite(photo);
   };
