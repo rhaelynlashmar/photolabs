@@ -1,30 +1,54 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import photos from '../mocks/photos';
 import topics from '../mocks/topics';
 
+export const ACTIONS = {
+  FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
+  FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
+  CLOSE_MODAL: 'CLOSE_MODAL',
+  OPEN_MODAL: 'OPEN_MODAL'
+};
+
+const initialState = {
+  modalPhoto: null,
+  favorites: [],
+  photos: photos,
+  topics: topics
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.FAV_PHOTO_ADDED:
+      return { ...state, favorites: [...state.favorites, action.payload] };
+    case ACTIONS.FAV_PHOTO_REMOVED:
+      return { ...state, favorites: state.favorites.filter(fav => fav.id !== action.payload.id) };
+    case ACTIONS.CLOSE_MODAL:
+      return { ...state, modalPhoto: null };
+    case ACTIONS.OPEN_MODAL:
+      return { ...state, modalPhoto: action.payload };
+    default:
+      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+  }
+};
+
 const useApplicationData = () => {
-  const [state, setState] = useState({
-    modalPhoto: null,
-    favorites: [],
-    photos: photos,
-    topics: topics
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleFavorite = (photo) => {
     const isFavorited = state.favorites.some(fav => fav.id === photo.id);
-    const newFavorites = isFavorited
-      ? state.favorites.filter(fav => fav.id !== photo.id)
-      : [...state.favorites, photo];
-
-    setState(prev => ({ ...prev, favorites: newFavorites }));
+    if (isFavorited) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photo });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photo });
+    }
   };
 
   const closeModal = () => {
-    setState(prev => ({ ...prev, modalPhoto: null }));
+    dispatch({ type: ACTIONS.CLOSE_MODAL });
   };
 
   const openModal = (photo) => {
-    setState(prev => ({ ...prev, modalPhoto: photo }));
+    dispatch({ type: ACTIONS.OPEN_MODAL, payload: photo });
   };
 
   return {
