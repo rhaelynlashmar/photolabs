@@ -1,19 +1,20 @@
-import { useReducer } from 'react';
-import photos from '../mocks/photos';
-import topics from '../mocks/topics';
+import { useReducer, useEffect } from 'react';
+
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   CLOSE_MODAL: 'CLOSE_MODAL',
-  OPEN_MODAL: 'OPEN_MODAL'
+  OPEN_MODAL: 'OPEN_MODAL',
+  FETCH_PHOTOS: 'FETCH_PHOTOS',
+  FETCH_TOPICS: 'FETCH_TOPICS'
 };
 
 const initialState = {
   modalPhoto: null,
   favorites: [],
-  photos: photos,
-  topics: topics
+  photoData: [],
+  topicData: [],
 };
 
 const reducer = (state, action) => {
@@ -26,6 +27,10 @@ const reducer = (state, action) => {
       return { ...state, modalPhoto: null };
     case ACTIONS.OPEN_MODAL:
       return { ...state, modalPhoto: action.payload };
+      case ACTIONS.FETCH_PHOTOS:
+      return { ...state, photoData: action.payload };
+    case ACTIONS.FETCH_TOPICS:
+      return { ...state, topicData: action.payload };
     default:
       throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
   }
