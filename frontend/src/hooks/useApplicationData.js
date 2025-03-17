@@ -41,12 +41,24 @@ const useApplicationData = () => {
 
   useEffect(() => {
     fetch('http://localhost:8001/api/photos')
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: ACTIONS.FETCH_PHOTOS, payload: data }));
-
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => dispatch({ type: ACTIONS.FETCH_PHOTOS, payload: data }))
+      .catch((error) => console.error('Fetch error:', error));
+  
     fetch('http://localhost:8001/api/topics')
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: ACTIONS.FETCH_TOPICS, payload: data }));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => dispatch({ type: ACTIONS.FETCH_TOPICS, payload: data }))
+      .catch((error) => console.error('Fetch error:', error));
   }, []);
 
   const toggleFavorite = (photo) => {
