@@ -40,11 +40,11 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    fetch('/api/photos')
+    fetch('http://localhost:8001/api/photos')
       .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.FETCH_PHOTOS, payload: data }));
 
-    fetch('/api/topics')
+    fetch('http://localhost:8001/api/topics')
       .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.FETCH_TOPICS, payload: data }));
   }, []);
