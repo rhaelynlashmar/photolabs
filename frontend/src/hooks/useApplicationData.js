@@ -69,8 +69,8 @@ const useApplicationData = () => {
   return {
     modalPhoto: state.modalPhoto,
     favorites: state.favorites,
-    photos: state.photos,
-    topics: state.topics,
+    photos: state.photoData,
+    topics: state.topicData,
     toggleFavorite,
     openModal,
     closeModal
