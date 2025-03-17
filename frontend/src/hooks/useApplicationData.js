@@ -1,13 +1,13 @@
 import { useReducer, useEffect } from 'react';
 
-
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   CLOSE_MODAL: 'CLOSE_MODAL',
   OPEN_MODAL: 'OPEN_MODAL',
-  FETCH_PHOTOS: 'FETCH_PHOTOS',
-  FETCH_TOPICS: 'FETCH_TOPICS'
+  SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  SET_TOPIC_PHOTOS: 'SET_TOPIC_PHOTOS'
 };
 
 const initialState = {
@@ -27,10 +27,12 @@ const reducer = (state, action) => {
       return { ...state, modalPhoto: null };
     case ACTIONS.OPEN_MODAL:
       return { ...state, modalPhoto: action.payload };
-      case ACTIONS.FETCH_PHOTOS:
+    case ACTIONS.SET_PHOTO_DATA:
       return { ...state, photoData: action.payload };
-    case ACTIONS.FETCH_TOPICS:
+    case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topicData: action.payload };
+    case ACTIONS.SET_TOPIC_PHOTOS:
+      return { ...state, photoData: action.payload };
     default:
       throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
   }
@@ -47,7 +49,7 @@ const useApplicationData = () => {
         }
         return response.json();
       })
-      .then((data) => dispatch({ type: ACTIONS.FETCH_PHOTOS, payload: data }))
+      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }))
       .catch((error) => console.error('Fetch error:', error));
   
     fetch('http://localhost:8001/api/topics')
@@ -57,7 +59,7 @@ const useApplicationData = () => {
         }
         return response.json();
       })
-      .then((data) => dispatch({ type: ACTIONS.FETCH_TOPICS, payload: data }))
+      .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }))
       .catch((error) => console.error('Fetch error:', error));
   }, []);
 
@@ -78,6 +80,18 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.OPEN_MODAL, payload: photo });
   };
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_PHOTOS, payload: data }))
+      .catch((error) => console.error('Fetch error:', error));
+  };
+
   return {
     modalPhoto: state.modalPhoto,
     favorites: state.favorites,
@@ -85,7 +99,8 @@ const useApplicationData = () => {
     topics: state.topicData,
     toggleFavorite,
     openModal,
-    closeModal
+    closeModal,
+    fetchPhotosByTopic
   };
 };
 
