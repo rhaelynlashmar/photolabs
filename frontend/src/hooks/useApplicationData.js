@@ -39,6 +39,16 @@ const reducer = (state, action) => {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    fetch('/api/photos')
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.FETCH_PHOTOS, payload: data }));
+
+    fetch('/api/topics')
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.FETCH_TOPICS, payload: data }));
+  }, []);
+
   const toggleFavorite = (photo) => {
     const isFavorited = state.favorites.some(fav => fav.id === photo.id);
     if (isFavorited) {
