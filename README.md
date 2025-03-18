@@ -45,7 +45,7 @@ You can run the linter and jest tests with the following commands:
 
 **Backend Setup** - ``` cd backend ```
 
-Instructions for backend can be seen here [backend/README.md]
+Instructions for backend can be seen here [backend/README.md](backend/README.md)
 
 
 
