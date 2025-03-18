@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from 'react';
 
+// Defining action types for the reducer
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
@@ -10,6 +11,7 @@ export const ACTIONS = {
   SET_TOPIC_PHOTOS: 'SET_TOPIC_PHOTOS'
 };
 
+// Initial state for the reducer
 const initialState = {
   modalPhoto: null,
   favorites: [],
@@ -17,6 +19,7 @@ const initialState = {
   topicData: [],
 };
 
+// Reducer function to manage state changes based on actions
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.FAV_PHOTO_ADDED:
@@ -38,9 +41,11 @@ const reducer = (state, action) => {
   }
 };
 
+// Custom hook to manage application data
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Fetching initial photo and topic data
   useEffect(() => {
     fetch('http://localhost:8001/api/photos')
       .then((response) => {
@@ -63,6 +68,20 @@ const useApplicationData = () => {
       .catch((error) => console.error('Fetch error:', error));
   }, []);
 
+    // Function to fetch photos by topic
+    const fetchPhotosByTopic = (topicId) => {
+      fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_PHOTOS, payload: data }))
+        .catch((error) => console.error('Fetch error:', error));
+    };
+
+  // Function to toggle a photo as favorite
   const toggleFavorite = (photo) => {
     const isFavorited = state.favorites.some(fav => fav.id === photo.id);
     if (isFavorited) {
@@ -72,26 +91,18 @@ const useApplicationData = () => {
     }
   };
 
+  // Function to close the modal
   const closeModal = () => {
     dispatch({ type: ACTIONS.CLOSE_MODAL });
   };
 
+  // Function to open the modal with photo details
   const openModal = (photo) => {
     dispatch({ type: ACTIONS.OPEN_MODAL, payload: photo });
   };
 
-  const fetchPhotosByTopic = (topicId) => {
-    fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_PHOTOS, payload: data }))
-      .catch((error) => console.error('Fetch error:', error));
-  };
 
+  // Returning the current state and functions to interact with it
   return {
     modalPhoto: state.modalPhoto,
     favorites: state.favorites,
