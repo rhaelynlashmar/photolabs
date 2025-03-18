@@ -35,7 +35,9 @@ The client-side Webpack development server.
 The API server to provide photo data.
 
 **Frontend Setup** - ``` cd frontend ```
+
 **Run the Development Server** -  ``` npm run dev ```
+
 You can visit the running application at [http://localhost:3000](http://localhost:3000)
 
 You can run the linter and jest tests with the following commands:
