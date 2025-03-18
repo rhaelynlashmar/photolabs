@@ -9,7 +9,7 @@ import PhotoFavButton from "./PhotoFavButton";
 // - openModal: Function to open a modal with photo details
 const PhotoListItem = ({ photo, favorites, toggleFavorite, openModal }) => {
   // Destructuring properties from the photo object
-  const { id, location, urls, user } = photo;
+  const { location, urls, user } = photo;
   const { city, country } = location;
   const { regular } = urls;
   const { name, profile } = user;
